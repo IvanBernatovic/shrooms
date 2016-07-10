@@ -1,20 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from './components/ShroomForm.vue'
+import VueResource from 'vue-resource'
+import $ from 'jquery'
+import _ from 'underscore'
 
+
+Vue.use(VueResource)
 Vue.use(VueRouter)
 
-var firebase = require("firebase/app");
-require("firebase/database");
-
-// Define some components
-var Foo = Vue.extend({
-    template: '<p>This is foo!</p>'
-})
-
-var Bar = Vue.extend({
-    template: '<p>This is bar!</p>'
-})
+import Index from './components/Form.vue'
+import List from './components/List.vue'
 
 var App = Vue.extend({})
 
@@ -25,32 +20,65 @@ router.map({
         name: 'index',
         component: Index
     },
-    '/foo': {
-        component: Foo
+    'list': {
+        name: "list",
+        component: List
     },
-    '/bar': {
-        component: Bar
-    }
 })
 
 router.start(App, '#app')
 
-const BASE_URL = 'https://shrooms-67f1d.firebaseio.com/'
 
-var config = {
-    apiKey: "AIzaSyD4iV7pQelWivVOaLyXbLzB0FkOWZZeZFY",
-    authDomain: "shrooms-67f1d.firebaseapp.com",
-    databaseURL: "https://shrooms-67f1d.firebaseio.com",
-    storageBucket: "shrooms-67f1d.appspot.com",
-};
+/*
+$( "#shroomForm" ).on("submit", function( event ) {
+    event.preventDefault();
+    var self = $( this )
+    var inputs = self.serializeArray()
+    var inputNames = _.pluck(inputs, "name")
+    var inputValues = _.pluck(inputs, "value")
+    console.log(inputNames)
+    console.log(inputValues)
+    console.log(self.serialize())
 
-firebase.initializeApp(config);
+    $.post({
+        url: "http://shrooms-api.app/api/v1/mushrooms",
+        type: "POST",
+        data: self.serialize(),
+        success: function(data) {
+            console.log("success")
+        },
+        error: function() {
+            console.log("error")
+        }
+    });
 
-// Get a reference to the database service
-var database = firebase.database();
-
-var Mushrooms = database.ref().child('shrooms').on('value', (snapshot) => {
-    console.log(snapshot.val())
-})
-
-console.log(Mushrooms)
+    /!*$.post({
+        url: self.attr("action"),
+        type: "POST",
+        headers: {
+            //"Authorization": "Bearer Yl4cUQUWRQfUgDfPP2ehUViWopaO9asYx+ed0sLBIxJvXKNQoaZimRs/w2lTe0o46ClCLsCX63znF8GOZ1K2Vg==",
+            "Content-Type": "application/json"
+        },
+        beforeSend: function (xhr){
+            xhr.setRequestHeader('Authorization',
+                "Bearer Yl4cUQUWRQfUgDfPP2ehUViWopaO9asYx+ed0sLBIxJvXKNQoaZimRs/w2lTe0o46ClCLsCX63znF8GOZ1K2Vg==");
+        },
+        data: {
+            "Inputs": {
+                "input1": {
+                    "ColumnNames": inputNames,
+                    "Values": [
+                        inputValues
+                    ]
+                }
+            },
+            "GlobalParameters": {}
+        },
+        success: function(data) {
+            console.log("success")
+        },
+        error: function() {
+            console.log("error")
+        }
+    });*!/
+});*/
