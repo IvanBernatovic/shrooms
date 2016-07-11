@@ -26685,7 +26685,7 @@ exports.default = {
         sendForm: function sendForm(event) {
             var self = this;
             _toastr2.default.info('Checking your mushroom...', 'Have faith');
-            this.$http.post('http://shrooms-api.app/api/v1/mushrooms', new FormData(event.target)).then(function (response) {
+            this.$http.post('http://shrooms-service.ivan-test.xyz/v1/mushrooms', new FormData(event.target)).then(function (response) {
                 if (response.data.mushroom.result == 'e') {
                     _toastr2.default.success('Your mushroom is edible!', 'Yum');
                 } else {
@@ -26919,7 +26919,7 @@ _vue2.default.filter('parseCamel', function (value) {
 exports.default = {
     init: function init() {
         var self = this;
-        this.$http.get('http://shrooms-api.app/api/v1/mushrooms').then(function (response) {
+        this.$http.get('http://shrooms-service.ivan-test.xyz/v1/mushrooms').then(function (response) {
             self.mushrooms = response.data.mushrooms;
         }, function (response) {
             console.log("Error");

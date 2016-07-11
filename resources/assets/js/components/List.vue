@@ -235,7 +235,7 @@
     export default{
         init(){
             var self = this
-            this.$http.get('http://shrooms-api.app/api/v1/mushrooms').then((response) => {
+            this.$http.get('http://shrooms-service.ivan-test.xyz/v1/mushrooms').then((response) => {
                 self.mushrooms = response.data.mushrooms;
             }, (response) => {
                 console.log("Error");
