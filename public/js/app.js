@@ -26684,6 +26684,7 @@ exports.default = {
     methods: {
         sendForm: function sendForm(event) {
             var self = this;
+            _toastr2.default.info('Checking your mushroom...', 'Have faith');
             this.$http.post('http://shrooms-api.app/api/v1/mushrooms', new FormData(event.target)).then(function (response) {
                 if (response.data.mushroom.result == 'e') {
                     _toastr2.default.success('Your mushroom is edible!', 'Yum');
@@ -26710,12 +26711,211 @@ if (module.hot) {(function () {  module.hot.accept()
 })()}
 },{"toastr":3,"vue":8,"vue-hot-reload-api":5}],12:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
-var __vueify_style__ = __vueify_insert__.insert("\n.card {\n    color: white;\n}\n")
+var __vueify_style__ = __vueify_insert__.insert("\n.center{\n    text-align: center;\n}\n\n.info-wrapper {\n    margin-top: 15px;\n}\n\n.dl-horizontal {\n    margin: 0;\n}\n")
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _underscore = require('underscore');
+
+var _underscore2 = _interopRequireDefault(_underscore);
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var valueTransformer = {
+    "capShape": {
+        "b": "Bell",
+        "c": "Conical",
+        "x": "Convex",
+        "f": "Flat",
+        "k": "Knobbed",
+        "s": "Sunken"
+    },
+    "capSurface": {
+        "f": "Fibrous",
+        "g": "Grooves",
+        "y": "Scaly",
+        "s": "Smooth"
+    },
+    "capColor": {
+        "n": "Brown",
+        "b": "Buff",
+        "c": "Cinnamon",
+        "g": "Gray",
+        "r": "Green",
+        "p": "Pink",
+        "u": "Purple",
+        "e": "Red",
+        "w": "White",
+        "y": "Yellow"
+    },
+    "bruises": {
+        "t": "Yes",
+        "f": "No"
+    },
+    "odor": {
+        "a": "Almond",
+        "l": "Anise",
+        "c": "Creosote",
+        "y": "Fishy",
+        "f": "Foul",
+        "m": "Musty",
+        "n": "None",
+        "p": "Pungent",
+        "s": "Spicy"
+    },
+    "gillAttachment": {
+        "a": "Attached",
+        "d": "Descending",
+        "f": "Free",
+        "n": "Notched"
+    },
+    "gillSpacing": {
+        "c": "Close",
+        "w": "Crowded",
+        "d": "Distant"
+
+    },
+    "gillSize": {
+        "b": "Broad",
+        "n": "Narrow"
+    },
+    "gillColor": {
+        "k": "Black",
+        "n": "Brown",
+        "b": "Buff",
+        "h": "Chocolate",
+        "g": "Gray",
+        "r": "Green",
+        "p": "Pink",
+        "u": "Purple",
+        "o": "Orange",
+        "w": "White",
+        "y": "Yellow",
+        "e": "Red"
+    },
+    "stalkShape": {
+        "e": "Enlarging",
+        "t": "Tapering"
+
+    },
+    "stalkRoot": {
+        "b": "Bulbous",
+        "c": "Club",
+        "u": "Cup",
+        "e": "Equal",
+        "z": "Rhizomorphs",
+        "r": "Rooted",
+        "?": "Missing"
+    },
+    "stalkSurfaceAboveRing": {
+        "f": " Fibrous",
+        "k": "Silky",
+        "y": "Scaly",
+        "s": "Smooth"
+
+    },
+    "stalkSurfaceBelowRing": {
+        "f": "Fibrous",
+        "k": "Silky",
+        "y": "Scaly",
+        "s": "Smooth"
+    },
+    "stalkColorAboveRing": {
+        "n": "Brown",
+        "b": "Buff",
+        "c": "Cinnamon",
+        "g": "Gray",
+        "o": "Orange",
+        "p": "Pink",
+        "e": "Red",
+        "w": "White",
+        "y": "Yellow"
+
+    },
+    "stalkColorBelowRing": {
+        "n": "Brown",
+        "b": "Buff",
+        "c": "Cinnamon",
+        "g": "Gray",
+        "o": "Orange",
+        "p": "Pink",
+        "e": "Red",
+        "w": "White",
+        "y": ">ellow"
+    },
+    "veilType": {
+        "p": "Partial",
+        "u": "Universal"
+
+    },
+    "veilColor": {
+        "n": "Brown",
+        "o": "Orange",
+        "w": "White",
+        "y": "Yellow"
+
+    },
+    "ringNumber": {
+        "n": "None",
+        "o": "One",
+        "t": "Two"
+    },
+    "ringType": {
+        "c": "Cobwebby",
+        "e": "Evanescent",
+        "f": "Flaring",
+        "l": "Large",
+        "n": "None",
+        "p": "Pendant",
+        "s": "Sheating",
+        "z": "Zone"
+    },
+    "sporePrintColor": {
+        "k": "Black",
+        "n": "Brown",
+        "b": "Buff",
+        "h": "Chocolate",
+        "r": "Green",
+        "o": "Orange",
+        "u": "Purple",
+        "w": "White",
+        "y": "Yellow"
+    },
+    "population": {
+        "a": "Abundant",
+        "c": "Clustered",
+        "n": "Numerous",
+        "s": "Scattered",
+        "v": "Several",
+        "y": "Solitary"
+    },
+    "habitat": {
+        "g": "Grasses",
+        "l": "Leaves",
+        "m": "Meadows",
+        "p": "Paths",
+        "u": "Urban",
+        "w": "Waste",
+        "d": "Woods"
+    },
+    "result": {
+        "e": "Edible",
+        "p": "Poisonous"
+    }
+};
+
+_vue2.default.filter('parseCamel', function (value) {
+    var result = value.replace(/([A-Z])/g, " $1");
+    return result.charAt(0).toUpperCase() + result.slice(1);
+});
+
 exports.default = {
     init: function init() {
         var self = this;
@@ -26732,8 +26932,9 @@ exports.default = {
     },
 
     methods: {
+        // not in use on final version
+
         successOrErrorClass: function successOrErrorClass(result) {
-            console.log(result);
             if (result == 'e') {
                 return {
                     'card-success': true
@@ -26743,18 +26944,24 @@ exports.default = {
                     'card-danger': true
                 };
             }
+        },
+        transformField: function transformField(label, value) {
+            // some values should be returned as original
+            if (_underscore2.default.contains(['id', 'name', 'created_at', 'updated_at', 'probability'], label)) return value;
+
+            return valueTransformer[label][value];
         }
     },
     components: {}
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"row\">\n    <div class=\"col-md-4\" v-for=\"mushroom in mushrooms\">\n        <div class=\"card card-inverse\" v-bind:class=\"successOrErrorClass(mushroom.result)\">\n            <div class=\"card-block\">\n                <h5>{{ mushroom.name }} - </h5>\n            </div>\n        </div>\n    </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"row\">\n    <div class=\"col-md-4\" v-for=\"mushroom in mushrooms\">\n        <div class=\"card \">\n            <div class=\"card-block\">\n                <div class=\"center\">\n                    <h4>{{ mushroom.name }} <small> - {{ transformField(\"result\", mushroom.result) }}</small></h4>\n                    <br>\n                    <button type=\"button\" class=\"btn btn-info-outline\" data-toggle=\"collapse\" data-target=\"#mushroom-info-{{ mushroom.id }}\">Show more</button>\n                </div>\n                <div class=\"info-wrapper\">\n                    <div class=\"collapse\" id=\"mushroom-info-{{ mushroom.id }}\">\n                        <div class=\"card card-block\">\n                            <dl class=\"dl-horizontal\">\n                                <template v-for=\"(key, value) in mushroom\">\n                                    <dt>{{ key | parseCamel }}</dt>\n                                    <dd>{{ transformField(key, value) }}</dd>\n                                </template>\n                            </dl>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.dispose(function () {
-    __vueify_insert__.cache["\n.card {\n    color: white;\n}\n"] = false
+    __vueify_insert__.cache["\n.center{\n    text-align: center;\n}\n\n.info-wrapper {\n    margin-top: 15px;\n}\n\n.dl-horizontal {\n    margin: 0;\n}\n"] = false
     document.head.removeChild(__vueify_style__)
   })
   if (!module.hot.data) {
@@ -26763,6 +26970,6 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-e711e88a", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":8,"vue-hot-reload-api":5,"vueify/lib/insert-css":9}]},{},[10]);
+},{"underscore":4,"vue":8,"vue-hot-reload-api":5,"vueify/lib/insert-css":9}]},{},[10]);
 
 //# sourceMappingURL=app.js.map
