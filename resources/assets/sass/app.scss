@@ -1,0 +1,21 @@
+@import '../../../node_modules/bootstrap/scss/bootstrap';
+
+body {
+  padding-bottom: 25px;
+}
+
+.radio-image-container {
+  width: 50px;
+}
+
+option {
+  text-transform: capitalize;
+}
+
+.shroom-section {
+  margin-bottom: 25px;
+
+  h2 {
+    color: #2c3e50;
+  }
+}

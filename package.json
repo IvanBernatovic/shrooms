@@ -13,8 +13,15 @@
     "laravel-elixir": "^5.0.0"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.2",
     "firebase": "^3.0.5",
+    "jquery": "^3.0.0",
+    "laravel-elixir-vueify": "^1.0.3",
+    "toastr": "^2.1.2",
+    "underscore": "^1.8.3",
     "vue": "^1.0.25",
+    "vue-resource": "^0.9.3",
+    "vue-router": "^0.7.13",
     "vueify": "^8.6.0"
   }
 }
