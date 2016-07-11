@@ -5,6 +5,7 @@
         methods: {
             sendForm(event){
                 var self = this
+                toastr.info('Checking your mushroom...', 'Have faith')
                 this.$http.post('http://shrooms-api.app/api/v1/mushrooms', new FormData(event.target)).then((response) => {
                 if(response.data.mushroom.result == 'e'){
                     toastr.success('Your mushroom is edible!', 'Yum')
